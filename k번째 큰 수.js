@@ -15,6 +15,8 @@ function Knum(arr,num){
     return a - b;
   });
 
+  console.log(ar1);
+
   //https://hianna.tistory.com/422 자바스크립트 배열 원소 중복제거
   const set = new Set(ar1);
   const ar2 = [...set];

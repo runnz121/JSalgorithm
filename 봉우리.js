@@ -5,17 +5,20 @@ function top(arr){
 
     for(let i = 0; i < arr.length; i++){
       for (let j = 0; j< arr.length; j++){
-        let idx  = 1;
+        let flag = 1;
         for(let k = 0; k < 4; k++){
             let s1 = i + x[k];
             let s2 = j + y[k];
             if(s1>= 0 && s1<arr.length && s2 >=0 && s2 <arr.length && arr[s1][s2] >= arr[i][j]){
-              idx = 0;
+              flag = 0;
+      
            }
-        }
-        if(idx == 1){
-          count++;
-        }
+          }
+           if(flag == 1){
+             count++;
+           }
+        
+  
       }
     }
 
