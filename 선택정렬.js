@@ -1,15 +1,28 @@
-function SS(arr){
-    let temp;
+function MIN(arr){
+    let min = Number.MAX_SAFE_INTEGER;
     
-    for(let i = 0; i < arr.length; i++){
-        if(arr[i] > arr[i+1]){
-            temp = arr[i];
-            arr[i] = arr[i+1];
-            arr[i+1] = temp;
-            i = 0;
+    for(let i=0; i <= arr.length; i++){
+        if(min >= arr[i]){
+            min = arr[i];
         }
     }
-    return arr;
+    console.log(min);
+    return min;
+}
+function SS(arr){
+    let minfirst = 0;
+    let ar1 =[];
+
+
+    for(let i = 0; i <= arr.length; i++){
+        minfirst=MIN(arr);
+        ar1.push(minfirst);
+        arr.splice(arr.indexOf(minfirst),1);
+        i = 0;
+    }
+
+
+    return ar1;
 
 }
  let arr = [13, 5, 11, 7, 23, 15];
