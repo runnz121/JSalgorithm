@@ -1,43 +1,63 @@
-function sum_cut(i, sum, cut, min_arr) {
-  let ans;
-  let idx;
-  while (sum < cut) {
-      sum += min_arr[i];
-      if (sum + min_arr[i + 1] > cut ) {
-          ans = sum;
-          idx = i;
-          sum = 0;
+class treeNode {
+  constructor(data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
+  }
+}//constructor 는 class내에서 객체를 생성하고 초기화하기 위한 특별한 메소드임.
+//클래스는  constructor라는 특별한 메서드를 하나씩만 가질 수 있다.
+
+class insertNode {
+  constructor() {
+    this.root = null;
+  }
+
+  insert(data) {
+    let node = new treeNode(data);
+
+    // 루드가 설정되어 있지 않다면 루트를 node로 만들어 준다. node는 treeNode()에서 뼈대를 받아온다.
+    if(!this.root) {
+      this.root = node;
+      return this;
+    }
+
+    // 비교를 위해 current 를 설정해 준다.
+    let current = this.root;
+
+    // current가 true 라면 while문을 돌면서 data와 지금 현재 data인 current data를 비교한다.
+    while (current) {
+      // 중복된 값은 어떤 결과를 리턴하지 않는다.
+      if(data === current.data) {
+        return;
+      }
+      // data가 current data(기준) 보다 작다면 왼쪽에 넣어준다.
+      if(data < current.data) {
+        if(!current.left) {
+          current.left = node;
           break;
+        }
+      // 이제 current data(기준)는 왼쪽의 data로 준다.
+        current = current.left;
+      }
+      // data가 기준 data(current data) 보다 크다면 오른쪽에 넣어준다.
+      if(data > current.data) {
+        if(!current.right) {
+          current.right = node;
+          break;
+        }
+        // 이제 current data(기준)는 오른쪽 data로 준다.
+        current = current.right;
       }
     }
-      console.log(ans,idx);
-      return {first : ans, second : idx};
-      
   }
+}
 
-  function quiet_feel(min_arr, n) {
-      min_arr.sort((a, b) => a - b);
-      let sum = 0;
-      let sum_cut_i = sum_cut();
-      let i_idx = 0;
-      let sum_arr = [];
-      for (let i of min_arr) {
-          sum += i;
-      }
-      let cut = Math.floor(sum / n);
-      sum = 0;
-      i = 0;
-     // console.log(i, sum, cut, min_arr);
-      while (i != min_arr.length) {
-          sum_arr.push(sum_cut(i, sum, cut, min_arr));
-          sum = 0;
-    
-          i++;
-      }
-     console.log(sum_cut_i.first + "here");
+let nums = new insertNode();
+nums.insert(10);
+nums.insert(5);
+nums.insert(11);
+nums.insert(3);
+nums.insert(6);
 
-      return sum;
-  }
-  let min_arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  let n = 3;
-  console.log(quiet_feel(min_arr, n));
+
+console.log(nums)
